@@ -45,8 +45,8 @@ def change_status_internship(id,status):
     try:
         with db.DbContext() as connection:
             cursor = connection.cursor()
-            cursor.execute("update internship set status = ? where id=?",(status,id))
-            print("Status updated!")
+            cursor.execute("update internship set status = ? where id = ?",(status,id))
+            print(f"{id} Status updated to :{status}")
     except Exception as e:
         print(f"{str(e)}")
 
@@ -54,7 +54,7 @@ def delete_internship(id):
     try:
         with db.DbContext() as connection:
             cursor = connection.cursor()
-            cursor.execute("delete from internship where id=?",(id,))
+            cursor.execute("delete from internship where id = ?",(id,))
             print("Internship deleted!")
     except Exception as e:
         print(f"{str(e)}")
@@ -91,16 +91,16 @@ def search_student(name):
         print(f"{str(e)}")
 
 
-def update_student(usn,attribute,vari):
+def update_student(usn,attribute,att_value):
     try:
         with db.DbContext() as connection:
             cursor = connection.cursor()
             if attribute == 'name':
-                cursor.execute("update student set name = ? where usn = ?",(vari,usn))
+                cursor.execute("update student set name = ? where usn = ?",(att_value,usn))
             elif attribute == 'sem':
-                cursor.execute("update student set sem = ? where usn = ?",(vari,usn))
+                cursor.execute("update student set sem = ? where usn = ?",(att_value,usn))
             elif attribute == 'placed':
-                cursor.execute("update student set placed = ? where usn = ?",(vari,usn))
+                cursor.execute("update student set placed = ? where usn = ?",(att_value,usn))
             print("Status updated!")
     except Exception as e:
         print(f"{str(e)}")
@@ -109,7 +109,7 @@ def delete_student(usn):
     try:
         with db.DbContext() as connection:
             cursor = connection.cursor()
-            cursor.execute("delete from student where usn=?",(usn,))
+            cursor.execute("delete from student where usn = ?",(usn,))
             print("Student deleted!")
     except Exception as e:
         print(f"{str(e)}")
@@ -120,7 +120,7 @@ def reg_student_internship(usn,iid):
         with db.DbContext() as connection:
             cursor = connection.cursor()
             cursor.execute("insert into register(iid,usn,status) values(?,?,?)",(iid,usn,0))
-            print(f"Student registered successfully for iid:{iid} internship")
+            print(f"Student {usn} registered successfully for iid:{iid} internship")
     except Exception as e:
         print(str(e))
 
